@@ -1,0 +1,74 @@
+# 第一步
+- 注册github账号
+- 配置信息
+    - 配置账户
+        ```
+            git config --global user.name zhufengpeixun1
+        ```
+    - 配置邮箱
+        ```
+            git config --global user.email 894918097@qq.com
+        ```
+## 本地的使用
+- 创建文件夹
+```
+   mkdir git5 && cd git5
+```
+## ls -al 查看所有文件
+## 初始化git 
+## local操作
+- 创建文件
+```
+    touch test.txt
+```
+- 像文本里输入内容
+```
+    echo hello > test.txt
+```
+- 查看git的状态
+```
+    git status
+```
+- 将内容从工作区放到缓存区
+```
+    git add 文件名
+``` 
+- 将缓存区里的内容拉回到工作区
+```
+    git rm --cached test.txt
+```
+- 增加多个文件
+```
+    git add . /git add -A
+```
+- 再次追加内容
+```
+    echo world >> test.txt
+```
+- 将现有的缓存区里的内容变到我们的工作区里
+```
+    git checkout 文件名字
+```
+- 增加到缓存区
+```
+    git add .
+```
+- 我们将缓存区里的代码全部的放到历史区里
+```
+    git commit -m '消息'
+```
+- github上创建仓库
+加号 new repository->起名->create
+- 创建gitignore文件
+```
+    git add .gitignore
+```
+- 添加远程仓库git remote add 名字 地址
+```
+    git remote add origin https://github.com/zhufengpeixun1/homework_node5.git
+```
+- git remote -v  查看仓库信息
+- 推送到远程仓库
+```
+git push origin master -u
+```

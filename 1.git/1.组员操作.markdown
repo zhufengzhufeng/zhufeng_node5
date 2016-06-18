@@ -1,0 +1,26 @@
+# 组长已经给了组员的权限
+- 组员写好自己的东西
+- 先git pull origin master
+ - 因为别人也在提交作业，如果你提交的不含别人，那会覆盖掉
+- 第xxx组/人名/第几周/第一周作业.txt 
+- git add / git commit -m ''
+- 再git pull origin master
+- git push origin master（自己组员把自己的代码提交到组长的仓库）
+
+
+- git pull  git fetch + git merge
+> 空文件不会被上传
+> 你拉下来以后不要更改别人的文件（防止冲突）
+
+fork 不会自动刷新 你了一个1 又增加了2  我fork下来被添加了1 2不会自动
+
+
+# 当收好作业后
+- git remote add teacher https://github.com/zhufengpeixun1/homework_node5
+- git pull teacher master
+- git pull origin master
+- 解决冲突
+- git add . /git commit -m 
+- pull request
+- 上老师的账号合并
+> 作业：每个人都要提交作业 组长合并 pull request到老师仓库
