@@ -7,3 +7,4 @@ console.log(sum);
 console.log(Math.pow(2,8)-1);
 //0xff 16进制 也是255
 console.log(15*16+15);
+
