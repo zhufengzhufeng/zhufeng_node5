@@ -92,9 +92,20 @@ Buffer.myConcat = function (list,len) {
     list.forEach(function (item) {
         item.copy(buffer,index);
         index += item.length;
-    })
+    });
+    //要将多余的截出来
     return buffer.slice(0,index);
 };
 console.log(Buffer.myConcat([buffer1,buffer2],4));
+
+//解决截取不够乱码的问题
+var StringDecoder  = require('string_decoder').StringDecoder;
+var sd = new StringDecoder;
+var buffer = new Buffer('珠峰');
+console.log(sd.write(buffer.slice(0,4)));
+console.log(sd.write(buffer.slice(4)));
+//判断是不是buffer类型
+console.log(Buffer.isBuffer(buffer));
+
 
 
