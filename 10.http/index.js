@@ -6,6 +6,7 @@ function getClock(){
 //监听readystatechange
     xhr.onreadystatechange = function () {
         if(xhr.readyState==4&&/2\d{2}/.test(xhr.status)){
+            //如果类型不是json的 response = responseText
             app.innerHTML = xhr.response;
         }
     };
