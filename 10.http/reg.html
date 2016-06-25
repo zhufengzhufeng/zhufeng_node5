@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="get" name="myform">
+    用户名: <input type="text" name="username">
+    密码: <input type="text" name="password">
+    <input type="button" value="提交" id="btn">
+    <!--?username=123&password=321 查询字符串-->
+</form>
+<script>
+    function serialize(myform){
+        //先获取表单中所用元素 获取的是类数组
+        var likeArray = myform.elements;
+        var arr = Array.prototype.slice.call(likeArray);
+        //遍历每一个数组里的元素 username=123&password=321
+        var ary = [];
+        arr.forEach(function (item) {
+            if(item.type=='text'){
+                ary.push(item.name+'='+item.value);
+            }
+        });
+        //返回一个查询字符串
+        return ary.join('&');
+    }
+    btn.onclick = function () {
+        //console.log(serialize(myform));
+        //创建xhr对象
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST','/reg',true);
+        xhr.responseType = 'json';
+        //设置响应类型 为json格式
+        xhr.onload = function () {
+            //后台返回的默认为字符串类型 如果指定responseType 那默认用response  text会报错
+            var obj = xhr.response;
+            console.log(obj);
+        }
+        xhr.send(serialize(myform));
+    }
+
+</script>
+</body>
+</html>

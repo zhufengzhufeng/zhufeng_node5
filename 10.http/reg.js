@@ -3,22 +3,32 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var path = require('path');
+var querystring = require('querystring');
 //第三方模块
 var mime = require('mime');
 http.createServer(function (request,response) {
-    
-    console.log(request.url);
  var urlObj  = url.parse(request.url,true);
     var pathname = urlObj.pathname;
 if(pathname=='/'){
     response.setHeader('Content-type','text/html;charset=utf8');
-    fs.createReadStream('./hello.html').pipe(response);
+    fs.createReadStream('./reg.html').pipe(response);
 }else if(pathname=='/favicon.ico'){
     response.statusCode = '404';
     response.end('');
-}else if(pathname=='/clock'){
+}else if(pathname=='/reg'){
     //像客户端返回最新的时间
-    response.end(new Date().toLocaleString());
+    //post请求 后台在哪里接受？
+    var result = [];
+    request.on('data', function (data) {
+        result.push(data);
+    });
+    request.on('end', function () {
+        //接收到了客户端的信息，将客户端的信息又再次返回
+        console.log(result.concat().toString());
+        //后台会处理成json
+
+        response.end(JSON.stringify(querystring.parse(result.concat().toString())));
+    });
 }else {
     var flag = fs.existsSync('./' + pathname);
     if (flag) {
