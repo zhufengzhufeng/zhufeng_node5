@@ -26,12 +26,10 @@ function say (words){
 say('我爱你');
 say('我爱你');
 
-function drink(){
-
-}
+function drink(){}
 var newDrink = drink(3, function () {
     console.log('喝完了');
-})
+});
 newDrink();
 newDrink();
 newDrink();
