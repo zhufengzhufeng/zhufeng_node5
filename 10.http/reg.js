@@ -18,16 +18,14 @@ if(pathname=='/'){
 }else if(pathname=='/reg'){
     //像客户端返回最新的时间
     //post请求 后台在哪里接受？
-    var result = [];
+    var result = '';
     request.on('data', function (data) {
-        result.push(data);
+        result+=data;
     });
     request.on('end', function () {
         //接收到了客户端的信息，将客户端的信息又再次返回
-        console.log(result.concat().toString());
         //后台会处理成json
-
-        response.end(JSON.stringify(querystring.parse(result.concat().toString())));
+        response.end(JSON.stringify(querystring.parse(result)));
     });
 }else {
     var flag = fs.existsSync('./' + pathname);
