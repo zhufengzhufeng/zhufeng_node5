@@ -27,26 +27,44 @@ Events.prototype.emit = function (eventName) {
         cur.forEach(function (item) {
             //这里的this是window
             item.apply(that,args);
-        })
+        });
     }
 };
 //移除事件
-Event.prototype.removeListener = function () {
-
+Events.prototype.removeListener = function (eventName,callback) {
+    //将eventName 对应的事件池里将callback移出掉
+    //过滤掉当前数组内和我要关闭的同名方法 filter返回过滤好的数组
+    this._events[eventName] = this._events[eventName].filter(function (item) {
+        return item!=callback;
+    });
 };
-//绑定一次
-Event.prototype.once = function () {
-
+//绑定一次 多次emit  只触发一次 绑定好后 把他执行 之后将绑定好的删除
+Events.prototype.once = function (eventName,callback) {
+    var that=this;
+    function _callback() {
+        callback.apply(that,arguments);
+        this.removeListener(eventName,_callback);
+    }
+    this.on(eventName,_callback);
+    //item.apply(this,args)
 };
 var e = new Events();
 function marry(who){
     console.log(who);
 }
-function marry1(who){
+/*function marry1(who){
     console.log(who,this.name);
-}
-e.on('结婚了',marry);
-e.on('结婚了',marry1);
-e.removeListener('结婚了',marry1);
+}*/
+e.once('结婚了',marry);
+//e.on('结婚了',marry1);
+//移出当前marry1的事件
+e.removeListener('结婚了',marry);
 //当我触发结婚了 会让对应的marry方法的得到执行
 e.emit('结婚了','珠峰培训');
+e.emit('结婚了','珠峰培训');
+e.emit('结婚了','珠峰培训');
+e.emit('结婚了','珠峰培训');
+//当前这个函数是数组里的第一项
+//[function(){},function(){}]
+
+//作业： 加工一下
