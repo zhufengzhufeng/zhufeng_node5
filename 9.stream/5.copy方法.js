@@ -18,10 +18,8 @@ function copy(source,target){
     ws.on('drain', function () {
         rs.resume();
     });
-
-    fs.createReadStream('./1.txt').pipe('./2.txt')
-
-
-
+    rs.on('end', function () {
+        ws.end(); //将缓存区的内容全部写入；
+    });
 }
 copy('./1.txt','./2.txt');
