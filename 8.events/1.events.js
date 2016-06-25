@@ -30,7 +30,14 @@ Events.prototype.emit = function (eventName) {
         })
     }
 };
+//移除事件
+Event.prototype.removeListener = function () {
 
+};
+//绑定一次
+Event.prototype.once = function () {
+
+};
 var e = new Events();
 function marry(who){
     console.log(who);
@@ -40,5 +47,6 @@ function marry1(who){
 }
 e.on('结婚了',marry);
 e.on('结婚了',marry1);
+e.removeListener('结婚了',marry1);
 //当我触发结婚了 会让对应的marry方法的得到执行
 e.emit('结婚了','珠峰培训');
