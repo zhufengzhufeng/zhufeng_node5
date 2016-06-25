@@ -23,6 +23,9 @@ if(pathname=='/'){
 }else if(pathname=='/favicon.ico'){
     response.statusCode = '404';
     response.end('');
+}else if(pathname=='/clock'){
+    //像客户端返回最新的时间
+    response.end(new Date().toLocaleString());
 }else {
     var flag = fs.existsSync('./' + pathname);
     if (flag) {
