@@ -26,7 +26,14 @@ function say (words){
 say('我爱你');
 say('我爱你');
 
-function drink(){}
+function drink(num,callback){
+    //num被保留下来了
+    return function () {
+        if(0==--num){
+            callback();
+        }
+    }
+}
 var newDrink = drink(3, function () {
     console.log('喝完了');
 });
