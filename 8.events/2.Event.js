@@ -40,3 +40,5 @@ g.emit('饿了','我');
 
 //最大监听数  默认10个
 
+//总结 addlistener,on,once,removeListener, emit ,listenercount,setMaxListeners ,removeAllListener
+
