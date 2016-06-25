@@ -6,6 +6,15 @@ var path = require('path');
 //第三方模块
 var mime = require('mime');
 http.createServer(function (request,response) {
+    
+    console.log(request.url);
+    
+    
+    
+    
+    
+    
+    
  var urlObj  = url.parse(request.url,true);
     var pathname = urlObj.pathname;
 if(pathname=='/'){
@@ -14,8 +23,16 @@ if(pathname=='/'){
 }else if(pathname=='/favicon.ico'){
     response.statusCode = '404';
     response.end('');
-}else{
-    response.setHeader('Content-type',mime.lookup(pathname)+';charset=utf8');
-    fs.createReadStream('.'+pathname).pipe(response);
+}else {
+    var flag = fs.existsSync('./' + pathname);
+    if (flag) {
+        response.setHeader('Content-type', mime.lookup(pathname) + ';charset=utf8');
+        fs.createReadStream('.' + pathname).pipe(response);
+    } else {
+        response.statusCode = '404';
+        response.end()
+    }
 }
 }).listen(8080);
+
+//我访问一个路径 /baozi?num=10  服务器返回包子10个
