@@ -28,7 +28,7 @@
         },1000);
         //两个参数 第一个参数返回$scope变化的值
         $scope.$watch(function () {
-            return  $scope.total; //必须return
+            return $scope.total; //必须return
         }, function (newVal) {
             console.log(newVal);
         });

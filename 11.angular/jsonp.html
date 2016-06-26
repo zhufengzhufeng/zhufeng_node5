@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<script src="http://localhost:3000/jsonp"></script>-->
+<script>
+    var script = document.createElement('script');
+    script.src = "http://localhost:3000/jsonp?callback=cb";
+    document.body.appendChild(script);
+    //通过cb来接受响应的数据
+    function cb(data){ //{name:1}
+        console.log(data)
+    }
+
+
+</script>
+</body>
+</html>

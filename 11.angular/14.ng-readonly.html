@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="cartCtrl">
+    <input type="text" ng-readonly="flag">
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('cartCtrl', function ($scope,$interval,$timeout) {
+        $scope.flag = false;
+        $timeout(function () {
+            $scope.flag = true;
+        },1000);
+        //ng-readonly仅读
+    });
+
+
+</script>
+</body>
+</html>

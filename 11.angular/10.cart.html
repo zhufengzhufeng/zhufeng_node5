@@ -44,13 +44,25 @@
 <script src="angular.js"></script>
 <script>
     var app = angular.module('appModule',[]);
-    app.controller('cartCtrl', function ($scope) {
+    app.controller('cartCtrl', function ($scope,$http) {
         $scope.dis = 0.2; //select选中是根据我们的value来选中
-        $scope.products = [
-            {name:'联想',price:100,count:1,selected:false},
-            {name:'mac',price:200,count:2,selected:false},
-            {name:'acer',price:500,count:2,selected:false},
-        ];
+        $scope.products = [];
+        //$http和jquery的ajax一样
+        //ajax的get方法
+        $http.get('/compute').success(function (data) {
+            //默认转换成json
+            $scope.products = data;
+        });
+        $http.post('/post',{data:1}).success(function (data) {
+            //默认转换成json
+            console.log(data);
+        });
+        //jsonp只支持get方法
+        $http.jsonp('http://localhost:3000/jsonp?callback=JSON_CALLBACK').success(function (data) {
+            //callback=JSON_CALLBACK 跟原生js一样返回指定callback
+            //默认转换成json
+            console.log(data);
+        });
         $scope.checkAll = function () {
             //得到下面每件商品的selected
             //$scope.checks就表示全选全不选的状态

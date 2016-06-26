@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="cartCtrl">
+   {{name}}
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',['appModule1']);
+    app.controller('cartCtrl', function ($scope,$interval,$timeout) {
+        $scope.name = 100;
+    });
+    var app1 = angular.module('appModule1',[]);
+    app1.controller('cartCtrl', function ($scope) {
+        $scope.name = 200;
+    });
+    //appModule依赖于appModule1  先走appModule1 又把cartCtrl控制覆盖掉
+    //bootstrap
+</script>
+</body>
+</html>
