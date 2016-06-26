@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="ctrl">
+    {{name}}
+    {{age}}
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.run(['$rootScope', function ($rootScope) {
+        $rootScope.age = 100;
+    }]);
+    app.controller('ctrl', ['$scope',function (a) {
+        //$scope是注入进来 ，人家给你起的名字如果压缩后名字改变就无法渲染
+        //字符串不会被压缩 '$scope'和函数里的变量是一一对应的
+        a.name = 'hello'
+    }]);
+</script>
+</body>
+
+</html>
