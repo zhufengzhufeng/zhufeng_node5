@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<body>
+<div ng-controller="cartCtrl">
+    <table class="table table-bordered">
+        <tr>
+            <td>全选 <input type="checkbox" ng-model="checks" ng-click="checkAll()"></td>
+            <td>商品</td>
+            <td>单价</td>
+            <td>数量</td>
+            <td>小计</td>
+            <td>操作</td>
+        </tr>
+        <tr ng-repeat="product in products">
+            <td><input type="checkbox" ng-model="product.selected" ng-click="select()"></td>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>
+                <button ng-click="product.count=product.count-1" ng-disabled="!product.count">-</button>
+                <input type="text" ng-model="product.count">
+                <button ng-click="product.count=product.count+1">+</button>
+            </td>
+            <td>{{product.price*product.count}}</td>
+            <td><button class="btn btn-primary" ng-click="remove(product)">删除</button></td>
+
+        </tr>
+        <tr>
+            <td colspan="6"><button class="btn btn-danger" ng-click="removeAll()">删除选中的</button>
+                总价格 {{total()}}
+                共{{count()}}商品 共{{countAll()}}件
+                <!--ng-options 代表要循环的项 a as将数组的项作为value  as for 将数组的内容作为客户所有的选择项-->
+                <select ng-model="dis" ng-options="a.value as a.name for a in arr"></select>
+                折后价格{{dis*total()}}
+            </td>
+
+        </tr>
+    </table>
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('cartCtrl', function ($scope) {
+        $scope.dis = 0.1; //select选中是根据我们的value来选中
+        $scope.products = [
+            {name:'联想',price:100,count:1,selected:false},
+            {name:'mac',price:200,count:2,selected:false},
+            {name:'acer',price:500,count:2,selected:false},
+        ];
+        $scope.checkAll = function () {
+            //得到下面每件商品的selected
+            //$scope.checks就表示全选全不选的状态
+            $scope.products.forEach(function (item) {
+                item.selected = $scope.checks;
+            })
+        };
+        $scope.select = function () {
+            var flag = true;//先默认 是全选状态
+            $scope.products.forEach(function (item) {
+                //如果有一个没选中 那么全选的状态应该是false
+                if(!item.selected){ //如果下面有一个没被选中那么就非全选
+                    flag = false;
+                }
+            });
+            $scope.checks = flag;
+        }
+        $scope.remove = function (cur) {
+            //在整个数组里将我要删除的过滤掉
+            $scope.products = $scope.products.filter(function (item) {
+               return  cur!=item; //不包含当前的就是我们要保留下来的
+            })
+        }
+        $scope.removeAll = function () {
+            $scope.products.forEach(function (item) {
+                if(item.selected){ //当前选中的删除掉
+                    $scope.remove(item);
+                }
+            })
+        }
+        $scope.total = function () {
+            var result = 0;
+            $scope.products.forEach(function (item) {
+                result+= item.price*item.count;
+            });
+            return result;
+        }
+        $scope.count = function () {
+            var count = 0;
+            $scope.products.forEach(function (item) {
+                if(item.selected){ //当前选中的删除掉
+                    count++;
+                }
+            })
+            return count
+        }
+        $scope.countAll = function () {
+            var count = 0;
+            $scope.products.forEach(function (item) {
+                if(item.selected){ //当前选中的删除掉
+                    count += item.count
+                }
+            })
+            return count
+        }
+        $scope.arr = [{name:'折扣1',value:0.1},{name:'折扣2',value:0.2},{name:'折扣3',value:0.3},{name:'折扣4',value:0.4}];
+    })
+    //ng-disabled 如果为true则不可用
+
+
+</script>
+</body>
+</html>
