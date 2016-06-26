@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body >
+<!--//通过ng-controller可以告诉controller使用在哪个范围内-->
+<div ng-controller="firstCtrl">
+    <input type="text" ng-model="name">
+    {{name}}
+</div>
+
+<script src="angular.js"></script>
+<script>
+    //当我们angular被引入以后 就会有一个全局对象angular
+    //可以通过angular来创建模块
+    //一切从模块开始
+    //param1: 模块的名字 param2:模块之间的依赖 params：配置
+    //如果不依赖模块默认是空数组 （如果没有默认是取出模块）
+    var app = angular.module('appModule',[]);
+    //app代表当前模块，我们要通过模块创建控制器
+    //创建控制器 通过模块创建控制器
+    //param1:控制器的名字  params：回调函数
+    //当我们创建一个控制 会赠送一个$scope,这个$scope就代表我们的viewModel（当前作用域）
+    app.controller('firstCtrl', function ($scope) {
+        //在当前作用域内设置一个name属性 {{}}可以取出当前作用域里的内容
+        $scope.name = 'hello';
+    });
+</script>
+
+
+</body>
+</html>
