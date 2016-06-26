@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="cartCtrl">
+    <img ng-src="{{src}}" alt="">
+    <a ng-href="{{src1}}">goBd</a>
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('cartCtrl', function ($scope,$interval,$timeout) {
+        $scope.src = 'http://docs.ngnice.com/img/AngularJS-small.png';
+        //%7B%7Bsrc%7D%7D
+        //ng-src = {{src}} 防止出现404
+        //ng-href 如果连接未加载好，那么点击时候是空连接
+        $timeout(function () {
+            //ng-href会等待数据加载好后刷新出来链接
+            $scope.src1='http://www.baidu.com';
+        },1000);
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="cartCtrl">
+    <!--ng-change="change()"-->
+    <input type="text" ng-model="name" >
+    {{total}}
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('cartCtrl', function ($scope,$interval,$timeout) {
+        $scope.change = function () {
+            console.log($scope.name);
+        }
+        //模型的名字
+        $scope.$watch("name", function (newVal,oldVal) {
+            //每次name值发生变化 会触发watch方法
+            console.log(newVal,oldVal);
+        });
+
+        $scope.total= 100;
+        $timeout(function () {
+            $scope.total= 200;
+        },1000);
+        //两个参数 第一个参数返回$scope变化的值
+        $scope.$watch(function () {
+            return  $scope.total; //必须return
+        }, function (newVal) {
+            console.log(newVal);
+        });
+    });
+    //watch方法
+
+
+</script>
+</body>
+</html>

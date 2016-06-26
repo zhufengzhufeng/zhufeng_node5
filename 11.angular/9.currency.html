@@ -17,7 +17,8 @@
         {{arr | json}}
     </pre>
     {{1466916041328| date:'yyyy-MM-dd hh:mm:ss'}}
-    <input type="text" ng-model="name">
+    <!--//当失去焦点的时候刷新模型-->
+    <input type="text" ng-model="name" ng-model-options="{updateOn:'blur'}">
     <div>
         <ul>
             <li ng-repeat="a in arr | orderBy:'age':false | filter:{age:name}">
