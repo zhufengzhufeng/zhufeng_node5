@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="cartCtrl">
+    {{data | date:'yyyy-MM-dd hh:mm:ss'}}
+    {{time}}
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('cartCtrl', function ($scope,$interval,$timeout) {
+        $scope.data = new Date();
+        $scope.time = 0;
+        //setInterval 是原声的方法，不会告诉我们的angular视图进行刷新
+        /*setInterval(function () {
+
+            //我们要强制告诉angular进行刷新视图
+            //写法1：
+            //$scope.$apply();
+            //写法2:
+            $scope.$apply(function () {
+                $scope.data = new Date();
+            });
+            //如果angular自己已经知道要刷新视图了，就不要在掉apply方法了
+            $scope.$apply()
+        },1000);*/
+        //带$符号的都是angular所提服务，他会自动的告诉angular刷新视图
+        var timer = $interval(function () {
+            $scope.data = new Date();
+            //$scope.$apply(); angular已经知道刷新了，你就不要再告诉了
+        },1000);
+        //监听视图销毁的时候，当页面跳转的时候
+        $scope.$on('$destroy', function () {
+            $interval.cancel(timer);//clearInterval
+        });
+        $timeout(function () {
+            $scope.time+=1;
+        },1000);
+    });
+
+</script>
+</body>
+</html>

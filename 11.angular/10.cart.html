@@ -45,7 +45,7 @@
 <script>
     var app = angular.module('appModule',[]);
     app.controller('cartCtrl', function ($scope) {
-        $scope.dis = 0.1; //select选中是根据我们的value来选中
+        $scope.dis = 0.2; //select选中是根据我们的value来选中
         $scope.products = [
             {name:'联想',price:100,count:1,selected:false},
             {name:'mac',price:200,count:2,selected:false},
@@ -67,47 +67,47 @@
                 }
             });
             $scope.checks = flag;
-        }
+        };
         $scope.remove = function (cur) {
             //在整个数组里将我要删除的过滤掉
             $scope.products = $scope.products.filter(function (item) {
                return  cur!=item; //不包含当前的就是我们要保留下来的
             })
-        }
+        };
         $scope.removeAll = function () {
             $scope.products.forEach(function (item) {
                 if(item.selected){ //当前选中的删除掉
                     $scope.remove(item);
                 }
             })
-        }
+        };
         $scope.total = function () {
             var result = 0;
             $scope.products.forEach(function (item) {
                 result+= item.price*item.count;
             });
             return result;
-        }
+        };
         $scope.count = function () {
             var count = 0;
             $scope.products.forEach(function (item) {
                 if(item.selected){ //当前选中的删除掉
                     count++;
                 }
-            })
+            });
             return count
-        }
+        };
         $scope.countAll = function () {
             var count = 0;
             $scope.products.forEach(function (item) {
                 if(item.selected){ //当前选中的删除掉
                     count += item.count
                 }
-            })
+            });
             return count
-        }
+        };
         $scope.arr = [{name:'折扣1',value:0.1},{name:'折扣2',value:0.2},{name:'折扣3',value:0.3},{name:'折扣4',value:0.4}];
-    })
+    });
     //ng-disabled 如果为true则不可用
 
 
