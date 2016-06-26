@@ -9,7 +9,13 @@
 <div ng-controller="firstCtrl">
     <input type="text" ng-model="name">
     {{name}}
+    {{hello()}}
+    <!--//将作用域上对应的方法执行后的返回值 返回到页面上-->
+    <div ng-controller="secondCtrl">
+        {{name}}
+    </div>
 </div>
+
 
 <script src="angular.js"></script>
 <script>
@@ -23,10 +29,23 @@
     //创建控制器 通过模块创建控制器
     //param1:控制器的名字  params：回调函数
     //当我们创建一个控制 会赠送一个$scope,这个$scope就代表我们的viewModel（当前作用域）
+    //$rootScope根作用域
+    app.run(function ($rootScope) {
+        //尽量不要再controller里定义，后期维护不好维护
+        //在run里定义，应用启动前进行定义
+        $rootScope.name = 'hello';
+    });
+
     app.controller('firstCtrl', function ($scope) {
         //在当前作用域内设置一个name属性 {{}}可以取出当前作用域里的内容
-        $scope.name = 'hello';
+        //要通过viewModel进行模型和视图的关联
+        $scope.hello = function () {
+           return 1
+        }
     });
+    app.controller('secondCtrl', function ($scope) {
+    })
+    //controller的作用域查找，如果自己家没有 ，别人家有会往上找
 </script>
 
 
