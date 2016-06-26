@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="angular-csp.css">
+    <style>
+        .red{color: red;}
+        .yellow{color:yellow}
+        .back{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="ctrl">
+    <div ng-include="'tmpl.html'"></div>
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('ctrl', function ($scope) {
+        //ng-include将模板嵌入到页面里
+    });
+</script>
+</body>
+
+</html>

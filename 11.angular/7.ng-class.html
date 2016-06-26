@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="angular-csp.css">
+    <style>
+        .red{color: red;}
+        .yellow{color:yellow}
+        .back{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="ctrl">
+    <div class="{{style}}">angular baby</div>
+    <div ng-class="{true:'red',false:'yellow'}[flag]">React MM</div>
+    <div ng-class="{'yellow':isRed,'back':isBack}">Hello</div>
+    <div ng-class="style">world</div>
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('ctrl', function ($scope) {
+        $scope.style = 'red';
+        $scope.flag =false;
+        $scope.isRed = true;
+        $scope.isBack = false;
+        //ng-class可以和class共存，两者可以同时存在
+    });
+</script>
+</body>
+
+</html>
