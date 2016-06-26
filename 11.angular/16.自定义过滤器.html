@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="cartCtrl">
+   {{data1}} {{num1}}
+    {{'aabbccdd' | my:3}}
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('cartCtrl', function ($scope,uppercaseFilter,currencyFilter) {
+        //在我们的控制器中使用过滤器
+        /*//使用什么过滤器就把angular提供的过滤器在后面加上Filter
+        $scope.data = 'abcdefg';
+        $scope.num = 100.00;
+        $scope.data1 = uppercaseFilter($scope.data);
+//        currency:'￥'
+        $scope.num1 = currencyFilter($scope.num,'￡');*/
+    });
+    //自定义过滤器 要通过模块创建 param1：过滤器的名字  
+    app.filter('my', function (uppercaseFilter) {
+        //在我们自定的过滤器中可以使用原生angular所提供的过滤器
+        //返回一个工厂函数  val = 100 | currency: len = '￥'
+        return function (val,len) {
+            return val.slice(0,val.length-len)+uppercaseFilter(val.slice(val.length-len));
+        }
+    })
+</script>
+</body>
+</html>
