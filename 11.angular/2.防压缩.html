@@ -15,11 +15,14 @@
     app.run(['$rootScope', function ($rootScope) {
         $rootScope.age = 100;
     }]);
-    app.controller('ctrl', ['$scope',function (a) {
+    //app.controller("ctrl",function(a){a.name=100});
+    app.controller("ctrl",["$scope","$rootScope",function(a,b){a.name="hello";b.age=200}]);
+   /* app.controller('ctrl', ['$scope','$rootScope',function (a,b) {
         //$scope是注入进来 ，人家给你起的名字如果压缩后名字改变就无法渲染
         //字符串不会被压缩 '$scope'和函数里的变量是一一对应的
-        a.name = 'hello'
-    }]);
+        a.name = 'hello';
+        b.age =200;
+    }]);*/
 </script>
 </body>
 

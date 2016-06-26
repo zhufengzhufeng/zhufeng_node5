@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="angular-csp.css">
+</head>
+<body>
+<div ng-controller="ctrl">
+    <!--//属性里的内容在运行前不会被现实-->
+    <!--<div ng-cloak>
+        {{name}}{{age}}
+    </div>-->
+    <div ng-bind="name"></div>
+    <!--//绑定一组数据-->
+    <div ng-bind-template="{{name}} {{age}}"></div>
+    <!--原封不动的输出我们的大括号 不会进行渲染-->
+    <div ng-non-bindable>{{bbb}}</div>
+    <div ng-bind-html="h1"></div>
+    <!--{{h1}}-->
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('ctrl', function ($scope,$sce) {
+        //我们可以通过ng-bind绑定一个数据防止闪烁，但是只能一个一个绑定
+        $scope.name = 'hello';
+        $scope.age = 'hello';
+        //用这个$sce 将原有的html生成到页面上
+        $scope.h1 = $sce.trustAsHtml('<h1>HelloWorld</h1>');
+//        $scope.h1 = '<h1>HelloWorld</h1>'
+    });
+</script>
+</body>
+
+</html>
