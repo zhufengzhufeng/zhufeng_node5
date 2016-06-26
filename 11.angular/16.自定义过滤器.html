@@ -26,7 +26,7 @@
         //在我们自定的过滤器中可以使用原生angular所提供的过滤器
         //返回一个工厂函数  val = 100 | currency: len = '￥'
         return function (val,len) {
-            return val.slice(0,val.length-len)+uppercaseFilter(val.slice(val.length-len));
+            return val.slice(0,-len)+uppercaseFilter(val.slice(-len));
         }
     })
 </script>
