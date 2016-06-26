@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="angular-csp.css">
+</head>
+<body>
+<div ng-controller="ctrl">
+    <!--//我们想拿到各级的索引 $index ,$even $odd $first $last-->
+    <!--<ul>
+        <li ng-repeat="a in arr" ng-init="parent=$index">
+            &lt;!&ndash;$index代表每次遍历时拿到的对应索引&ndash;&gt;
+            <div ng-repeat="s in a.special">
+                &lt;!&ndash;//在子循环里拿父循环的索引&ndash;&gt;
+                {{parent}}{{$index}}
+                &lt;!&ndash;parent代表每次循环的父索引&ndash;&gt;
+                {{s}}
+            </div>
+        </li>
+    </ul>-->
+    //通过一个变量遍历我们的数组
+    <ul>
+        <li ng-repeat="n in arr track by $index">
+            {{n}}
+        </li>
+    </ul>
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('ctrl', function ($scope,$sce) {
+        /*$scope.arr = [
+            {name:'联想',price:3000,special:['发热','散热差']},
+            {name:'dell',price:600,special:['做面包']},
+            {name:'苹果',price:10000,special:['expensive']},
+        ];*/
+
+        $scope.arr = [
+                "苹果",
+                "苹果",
+                "苹果",
+                "苹果",
+        ]
+        //将我们的数据 显示到页面上
+        //要重复谁 就把repeat写到谁的身上
+        //ng-init在当前作用域下初始化一个变量
+        //ng-repeat会创建自己的作用域
+        //如果我们遍历数组的时候 尽量写track by key.id
+    });
+</script>
+</body>
+
+</html>

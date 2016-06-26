@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="angular-csp.css">
+</head>
+<body>
+<div ng-controller="ctrl">
+    <div ng-click="flag = !flag">{{flag?"显示":"隐藏"}}</div>
+    <div ng-if="flag">content</div>
+
+    <div ng-if="phones.length">
+        <ul>
+            <li ng-repeat="phone in phones track by $index">
+                {{phone}}
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('ctrl', function ($scope,$sce) {
+        //如果不写引号取到的是angular上的变量
+        $scope.flag = true;
+
+        $scope.phones =[
+
+        ]
+
+
+        $scope.add = function () {
+            alert(1);
+        }
+        //ng-show / ng-hide
+        //ng-show为true的时候显示
+        //ng-hide为true的时候隐藏
+        //ng-show/ng-hide只是单纯切换样式 让其none和block
+        //ng-if 在不停的移除dom
+
+        //在频繁切换的时候用ng-show/ng-hide
+        //数据确定下来 不会变的情况下 应该用ng-if
+        //如果ng-if不成立 里面的指令不会再执行
+        //ng-show尽管为false 仍然会执行内部指令
+
+        //ng-show初始化的时候性能消耗大 ng-if频繁切换的时候消耗性能大
+    });
+</script>
+</body>
+
+</html>
